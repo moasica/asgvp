@@ -3,8 +3,10 @@ const http = require('http');
 const server = http.createServer(async (req, res) => {
   try {
     if (!req.url.startsWith('/?url=')) {
-      res.writeHead(400);
-      return res.end('Error: Invalid URL');
+      res.writeHead(307, 'Temporary Redirect', {
+        'location': 'https://github.com/projectytm/asgvp/tree/main'
+      });
+      return res.end();
     }
   
     const uri = new URL('http://localhost:8080' + req.url);
