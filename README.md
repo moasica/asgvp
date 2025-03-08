@@ -16,7 +16,7 @@ The URL parameter should be a URL-encoded `googlevideo.com` URL.
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/projectytm/asgvp.git
+   git clone https://github.com/moasica/asgvp.git
    cd asgvp
    ```
 
