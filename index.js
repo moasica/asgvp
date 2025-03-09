@@ -29,9 +29,23 @@ const server = http.createServer(async (req, res) => {
     const data = await f.arrayBuffer();
   
     const resH = new Headers();
-    resH.set('Content-Type', f.headers.get('Content-Type'));
+    const contentLength = f.headers.get('Content-Length');
+    if (contentLength) resH.set('Content-Length', contentLength);
+    const contentType = f.headers.get('Content-Type');
+    if (contentType) resH.set('Content-Type', contentType);
+    const contentDisposition = f.headers.get('Content-Disposition');
+    if (contentDisposition) resH.set('Content-Disposition', contentDisposition);
+    const acceptRanges = f.headers.get('Accept-Ranges');
+    if (acceptRanges) resH.set('Accept-Ranges', acceptRanges);
+    const contentRange = f.headers.get('Content-Range');
+    if (contentRange) resH.set('Content-Range', contentRange);
+    
+    resH.set('Cache-Control', 'no-cache'/*'private, max-age=21298'*/);
+
     resH.set('Access-Control-Allow-Origin', '*');
-    resH.set('Cache-Control', 'private, max-age=21298');
+    resH.set('Access-Control-Allow-Headers', '*');
+    resH.set('Access-Control-Allow-Methods', '*');
+    resH.set('Access-Control-Allow-Credentials', 'true');
   
     res.setHeaders(resH);
   
